@@ -1,0 +1,29 @@
+{
+  "name": "koda-b8-backendjs2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almarufh/koda-b8-backendjs2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/almarufh/koda-b8-backendjs2/issues"
+  },
+  "homepage": "https://github.com/almarufh/koda-b8-backendjs2#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.4"
+  }
+}
