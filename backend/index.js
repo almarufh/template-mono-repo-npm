@@ -4,9 +4,13 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.get('/', (req, res) => {
-  res.send('Server Backend Express Berjalan!');
+
+   res.send('Server Backend Express Berjalan!');
+
 });
 
 app.listen(PORT, () => {
-  console.log(`[Server Backend] connected http://localhost:${PORT}`);
+
+   console.log(`[Server Backend] connected http://localhost:${PORT}`);
+
 });
