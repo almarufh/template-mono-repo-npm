@@ -10,6 +10,8 @@
   "scripts": {
     "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "dev:backend": "npm run dev -w backend",
     "dev:frontend": "npm run dev -w frontend"
   },
@@ -26,6 +28,12 @@
   },
   "homepage": "https://github.com/almarufh/koda-b8-backendjs2#readme",
   "devDependencies": {
-    "concurrently": "^10.0.4"
+    "@eslint/js": "^9.39.5",
+    "concurrently": "^10.0.4",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.8.0"
   }
 }
