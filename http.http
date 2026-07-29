@@ -1,0 +1,49 @@
+POST /auth/login
+Host: localhost:1902
+Content-Type: application/x-www-form-urlencoded
+
+email=alhyghufron29@gmail.com&password=1234
+
+###
+
+POST /auth/logout
+Host: localhost:1902
+Content-Type: application/x-www-form-urlencoded
+
+id=1785315683902
+
+###
+
+POST /auth/register
+Host: localhost:1902
+Content-Type: application/x-www-form-urlencoded
+
+name=Alhy Ghufron&email=alhyghufron29@gmail.com&password=1234
+
+###
+
+POST /notes/create
+Host: localhost:1902
+Content-Type: application/x-www-form-urlencoded
+
+user=1785312952021
+&title=baru sitzul
+
+###
+PATCH /notes/change
+Host: localhost:1902
+Content-Type: application/x-www-form-urlencoded
+
+id=1785332275017
+&user=1785312952021
+&title=myworkspace
+&content=Ngoding setiap saat, apakah kamu bisa bahagia?r
+&label=jobs
+&pin=false
+&arch=true
+&del=true
+
+###
+GET /notes/1785312952021
+Host: localhost:1902
+Content-Type: application/x-www-form-urlencoded

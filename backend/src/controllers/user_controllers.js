@@ -9,7 +9,7 @@ import * as mUser from '../models/users_models.js';
 export function register (req, res) {
 
    const { name, email, password } = req.body;
-   console.log(name)
+   console.log(name);
 
    let newUser = {
       name: name,
@@ -21,67 +21,3 @@ export function register (req, res) {
    res.json({results});
 
 }
-
-// export function getListUsers (req, res) {
-
-//    res.json({
-//       success: true,
-//       message: "succes",
-//       data: getUsers()
-//    });
-
-// }
-
-// export function getDetailUser (req, res) {
-
-//    const email = req.params.email;
-//    console.log(email);
-//    let results = DetailUser(email);
-//    console.log(results);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export function updateUser (req, res) {
-
-//    const emailUser = req.params.email;
-//    const {email, name} = req.body;
-//    let results = changeUser(emailUser, email, name);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export function deletedUser (req, res) {
-
-//    const {email} = req.params;
-//    console.log(res);
-//    let results = deleteUser(email);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export function search (req, res) {
-
-//    const {searching, limit, page} = req.query;
-//    let results = searchUser(searching, limit, page);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export async function upload(req, res) {
-
-//    console.log(req.file);
-//    res.json({
-//       success: true,
-//       message: "upload images success"
-//    });   
-
-// }

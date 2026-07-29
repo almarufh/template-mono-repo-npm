@@ -2,9 +2,9 @@ import path from 'path';
 import * as db from "../lib/data.js";
 import * as modelUser from "./users_models.js";
 
-const PATH_AUTH = path.join(process.cwd(), 'data', 'auth.json');
+export const PATH_AUTH = path.join(process.cwd(), 'data', 'auth.json');
 
-function accessExist (auth, id) {
+export function accessExist (auth, id) {
 
    const results = auth.find(a => a.id === id);
    if (results === undefined) {
@@ -25,10 +25,10 @@ function accessExist (auth, id) {
 
 }
 
-function login (userLogin) {
+export function login (userLogin) {
 
    const res = modelUser.findUserByEmail(userLogin.email);
-   if (res.succes === true) {
+   if (res.success === true) {
 
       if (res.data.password === userLogin.password) {
 
@@ -87,7 +87,7 @@ function login (userLogin) {
 
 }
 
-function logout (id) {
+export function logout (id) {
 
    let auth = db.loadData(PATH_AUTH);
    let {success, data} = accessExist(auth, id);
@@ -114,18 +114,3 @@ function logout (id) {
    }
 
 }
-
-export {
-   PATH_AUTH,
-   accessExist,
-   login,
-   logout
-};
-
-console.log(login({
-   email: 'alhy23@gmail.com',
-   password: '1234'
-}));
-// console.log(logout(2));
-// console.log(findUserByEmail("alhy23@gmail.com"))
-// console.log(findUserByEmail("hidayatmaruf99@gmail.com"))

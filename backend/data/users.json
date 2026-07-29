@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1785312391898",
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "1234",
+    "createdAt": "29/7/2026, 16.06.31"
+  },
+  {
+    "id": "1785312447951",
+    "name": "Alma'ruf Hidayat",
+    "email": "hidayatmaruf99@gmail.com",
+    "password": "1234",
+    "createdAt": "29/7/2026, 16.07.27"
+  },
+  {
+    "id": "1785312952021",
+    "name": "Siti Zulaikha",
+    "email": "zulaikha529@gmail.com",
+    "password": "1234",
+    "createdAt": "29/7/2026, 16.15.52"
+  },
+  {
+    "id": "1785315683902",
+    "name": "Alhy Ghufron",
+    "email": "alhyghufron29@gmail.com",
+    "password": "1234",
+    "createdAt": "29/7/2026, 17.01.23"
+  }
+]

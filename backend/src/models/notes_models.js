@@ -5,16 +5,28 @@ export const PATH_NOTES = path.join(process.cwd(), 'data', 'notes.json');
 
 export function createNotes (data) {
 
+   console.log("masuk models");
+
+   if (!data.id_user || !data.title) {
+
+      return {
+         success: false,
+         message: `tittle cannot be empty!`,
+         data: null
+      };
+   
+   }
+
    let res = db.loadData(PATH_NOTES);
    let newNotes = {
-      id: Date.now(),
-      id_users : data.id_user,
+      id: `${Date.now()}`,
+      id_user : data.id_user,
       title: data.title,
       content: data.content,
-      label: data.label || null,
-      isPinned: false,
-      isArchived: false,
-      isDelete: false,
+      label: data.label,
+      isPinned: data.isPinned,
+      isArchived: data.isArchived,
+      isDelete: data.isDelete,
       createdAt: new Date().toLocaleString("id"),
       updatedAt: new Date().toLocaleString("id")
    };
@@ -30,7 +42,7 @@ export function createNotes (data) {
 
 export function noteExist (res, id){
 
-   let results = res.find(n => n.id = id);
+   let results = res.find(n => n.id === id);
    if (results === undefined) {
 
       return {
@@ -75,13 +87,14 @@ export function getNotes (id){
 
 
 export function changeNote (note) {
-
-   let res = db.loadData(PATH_NOTES);
+   
+   const res = db.loadData(PATH_NOTES);
    let {success, data} = noteExist(res, note.id);
    if (success) {
 
-      let result = res.filter(e => e.id === note.id && e.id_user === note.id_user);
+      let result = res.filter(e => e.id !== data.id);
       note.updatedAt = new Date().toLocaleString("id");
+      note.createdAt = data.createdAt;
       result.push(note);
       db.saveData(result, PATH_NOTES);
       return {
@@ -99,26 +112,3 @@ export function changeNote (note) {
    }
 
 }
-
-let newNotes1 = {
-   id_user: 1,
-   title: "malam minggu",
-   content: "hari yang sangat membahagiakan",
-};
-
-let newNotes2 = {
-   id: 1785306954260,
-   id_user: 1,
-   title: "malam Senin",
-   content: "hari yang sangat membahagiakan",
-   label: "TEKNIK",
-   isPinned: true,
-   isArchived: false,
-   isDelete: true,
-   createdAt: "29/7/2026, 14.35.54",
-   updatedAt: "29/7/2026, 14.35.54"
-};
-
-// console.log(createNotes(newNotes1));
-// console.log(changeNote(newNotes2));
-console.log(getNotes(2));

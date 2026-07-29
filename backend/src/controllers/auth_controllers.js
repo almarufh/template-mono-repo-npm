@@ -1,87 +1,43 @@
 import {constants} from 'node:http2';
 import * as mUser from '../models/users_models.js';
+import * as mAuth from '../models/auth_models.js';
 
 /**
  * 
  * @param {import{"expres"}.Request} req 
  * @param {import{"express"}.Response} res 
 */
+
 export function register (req, res) {
 
    const { name, email, password } = req.body;
-   console.log(name)
-
    let newUser = {
       name: name,
       email: email,
       password: password
    };
-    
    let results = mUser.createUser(newUser);
    res.json({results});
 
 }
 
-// export function getListUsers (req, res) {
+export function login (req, res) {
 
-//    res.json({
-//       success: true,
-//       message: "succes",
-//       data: getUsers()
-//    });
+   const { email, password } = req.body;
+   let userLogin = {
+      email: email,
+      password: password
+   };
+   let results = mAuth.login(userLogin);
+   res.json({results});
 
-// }
+}
 
-// export function getDetailUser (req, res) {
+export function logout (req, res) {
 
-//    const email = req.params.email;
-//    console.log(email);
-//    let results = DetailUser(email);
-//    console.log(results);
-//    res.json({
-//       results
-//    });
+   const id = req.body.id;
 
-// }
+   let results = mAuth.logout(id);
+   res.json({results});
 
-// export function updateUser (req, res) {
-
-//    const emailUser = req.params.email;
-//    const {email, name} = req.body;
-//    let results = changeUser(emailUser, email, name);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export function deletedUser (req, res) {
-
-//    const {email} = req.params;
-//    console.log(res);
-//    let results = deleteUser(email);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export function search (req, res) {
-
-//    const {searching, limit, page} = req.query;
-//    let results = searchUser(searching, limit, page);
-//    res.json({
-//       results
-//    });
-
-// }
-
-// export async function upload(req, res) {
-
-//    console.log(req.file);
-//    res.json({
-//       success: true,
-//       message: "upload images success"
-//    });   
-
-// }
+}

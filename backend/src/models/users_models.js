@@ -21,7 +21,7 @@ function createUser ( newUser ) {
 
    let users = load(PATH_USERS);
    newUser = {
-      "id": Date.now(),
+      "id": `${Date.now()}`,
       "name": newUser.name,
       "email": newUser.email,
       "password": newUser.password,
