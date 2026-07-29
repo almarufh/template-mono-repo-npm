@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 function directory(filePath) {
 
    const dirname = path.dirname(filePath);
