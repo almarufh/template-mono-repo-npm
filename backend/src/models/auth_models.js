@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import * as db from "../lib/users_data.js";
+import * as db from "../lib/data.js";
 import * as modelUser from "./users_models.js";
 
 const PATH_AUTH = path.join(process.cwd(), 'backend/data', 'auth.json');
@@ -37,13 +37,12 @@ function login (userLogin) {
          const token = Date.now() + '-' + Math.round(Math.random() * 1E9);
          let auth = db.loadData(PATH_AUTH);
          let {success, data} = accessExist(auth, id);
-         console.log(data)
 
          if (success) {
 
             data.access= true;
             data.token = token;
-            data.createdAt = Date.now();
+            data.createdAt = new Date().toLocaleString("id");
             let res = auth.filter(a => a.id !== id);
             res.push(data);
             db.saveData(res, PATH_AUTH);
@@ -54,7 +53,7 @@ function login (userLogin) {
                access: true,
                id: id,
                token: token,
-               createdAt: Date.now()
+               createdAt: new Date().toLocaleString("id")
             };
             auth.push(userLogin);
             db.saveData(auth, PATH_AUTH);
@@ -91,19 +90,16 @@ function login (userLogin) {
 
 function logout (id) {
 
-   userLogin = {
-      access: true,
-      id: id,
-      token: token,
-      createdAt: Date.now()
-   };
-   let auth = data.loadData(PATH_AUTH);
-   if (accessExist(auth, id)) {
+   let auth = db.loadData(PATH_AUTH);
+   let {success, data} = accessExist(auth, id);
+   if (success) {
       
-      const results = auth.find(a => a.id === id);
-      results.access = false;
+      data.access = false;
+      data.token = null;
+      data.createdAt = new Date().toLocaleString("id");
       let res = auth.filter(a => a.id !== id);
-      data.saveData(res, PATH_AUTH);
+      res.push(data);
+      db.saveData(res, PATH_AUTH);
       return {
          success: true,
          message: "logout success!"
@@ -120,18 +116,17 @@ function logout (id) {
 
 }
 
-
 export {
    PATH_AUTH,
    accessExist,
    login,
+   logout
 };
 
-let newLogin = {
-   email: "hidayatmaruf99@gmail.com",
-   password: "1234"
-};
-console.log(login(newLogin));
-// console.log(logout(newLogin));
+console.log(login({
+   email: 'alhy23@gmail.com',
+  password: '1234'
+}));
+// console.log(logout(2));
 // console.log(findUserByEmail("alhy23@gmail.com"))
 // console.log(findUserByEmail("hidayatmaruf99@gmail.com"))
