@@ -1,13 +1,12 @@
 import express from 'express';
+import routers from './src/routers/index.js';
 
-const app = express();
 const PORT = process.env.PORT;
+const app = express();
 
-app.get('/', (req, res) => {
+app.use(express.urlencoded())
+app.use(routers)
 
-   res.send('Server Backend Express Berjalan!');
-
-});
 
 app.listen(PORT, () => {
 
