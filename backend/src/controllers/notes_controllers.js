@@ -63,8 +63,10 @@ export function changeNotes (req, res) {
 
 }
 export function getNotesUser (req, res) {
-   const {id} = req.params
-   let results = mNote.getNotes(id)
-   res.json({results})
+
+   const {id} = req.params;
+   let results = mNote.getNotes(id);
+   res.json({results});
+
 }
 
