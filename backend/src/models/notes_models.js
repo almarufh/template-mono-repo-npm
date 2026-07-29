@@ -5,8 +5,6 @@ export const PATH_NOTES = path.join(process.cwd(), 'data', 'notes.json');
 
 export function createNotes (data) {
 
-   console.log("masuk models");
-
    if (!data.id_user || !data.title) {
 
       return {
