@@ -3,14 +3,29 @@ import path from 'path';
 import { 
    loadData as load, 
    saveData as save  
-} from "../lib/users_data.js";
+} from "../lib/data.js";
 
 const PATH_USERS = path.join(process.cwd(), 'backend/data', 'users.json');
 
 function createUser ( newUser ) {
 
+   const {success, data} = findUserByEmail(newUser.email)
+   if (success) {
+      return {
+         success: false,
+         message:"account alredy exist!",
+         data: data.name
+      };
+   }
+
    let users = load(PATH_USERS);
-   console.log("users", users);
+   newUser = {
+      "id": Date.now(),
+      "name": newUser.name,
+      "email": newUser.email,
+      "password": newUser.password,
+      "createdAt": new Date().toLocaleString("id")
+   };
    users.push(newUser);
    save(users, PATH_USERS);
    return newUser;
@@ -32,7 +47,7 @@ function findUserByEmail (email) {
    } else {
 
       return {
-         succes: true,
+         success: true,
          message: `Found user ${results.name}`,
          data: results
       };
@@ -56,7 +71,7 @@ function findUserById (id) {
    } else {
 
       return {
-         succes: true,
+         success: true,
          message: `Found user ${results.name}`,
          data: results
       };
@@ -67,7 +82,6 @@ function findUserById (id) {
 
 
 let newUser = {
-   "id": 1,
    "name": "Alhy Ghufron",
    "email": "alhy23@gmail.com",
    "password": "1234"
@@ -88,6 +102,6 @@ export {
    findUserById
 };
 
-// console.log(createUser(newUser))
+console.log(createUser(newUser))
 // console.log(findUserByEmail("alhy23@gmail.com"))
 // console.log(findUserByEmail("hidayatmaruf99@gmail.com"))
