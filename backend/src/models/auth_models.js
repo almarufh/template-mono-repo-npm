@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import * as data from "../lib/users_data.js";
-import * as users from "./users_models.js";
+import * as db from "../lib/users_data.js";
+import * as modelUser from "./users_models.js";
 
 const PATH_AUTH = path.join(process.cwd(), 'backend/data', 'auth.json');
 
@@ -10,11 +10,17 @@ function accessExist (auth, id) {
    const results = auth.find(a => a.id === id);
    if (results === undefined) {
 
-      return false;
+      return {
+         success: false,
+         data: null
+      };
    
    } else {
 
-      return true;
+      return {
+         success: true,
+         data: results
+      };
    
    }
 
@@ -22,36 +28,38 @@ function accessExist (auth, id) {
 
 function login (userLogin) {
 
-   const res = users.findUserByEmail(userLogin.email);
+   const res = modelUser.findUserByEmail(userLogin.email);
    if (res.succes === true) {
 
       if (res.data.password === userLogin.password) {
 
          const id = res.data.id;
-
          const token = Date.now() + '-' + Math.round(Math.random() * 1E9);
-         userLogin = {
-            access: true,
-            id: id,
-            token: token
-         };
+         let auth = db.loadData(PATH_AUTH);
+         let {success, data} = accessExist(auth, id);
+         console.log(data)
 
-         let auth = data.loadData(PATH_AUTH);
+         if (success) {
 
-         if (accessExist(auth, id)) {
-
+            data.access= true;
+            data.token = token;
+            data.createdAt = Date.now();
             let res = auth.filter(a => a.id !== id);
-            res.push(userLogin)
-            data.saveData(res, PATH_AUTH);
+            res.push(data);
+            db.saveData(res, PATH_AUTH);
          
          } else {
 
+            userLogin = {
+               access: true,
+               id: id,
+               token: token,
+               createdAt: Date.now()
+            };
             auth.push(userLogin);
-            data.saveData(auth, PATH_AUTH);
+            db.saveData(auth, PATH_AUTH);
          
          }
-
-
 
          return {
             success: true,
@@ -81,9 +89,41 @@ function login (userLogin) {
 
 }
 
+function logout (id) {
+
+   userLogin = {
+      access: true,
+      id: id,
+      token: token,
+      createdAt: Date.now()
+   };
+   let auth = data.loadData(PATH_AUTH);
+   if (accessExist(auth, id)) {
+      
+      const results = auth.find(a => a.id === id);
+      results.access = false;
+      let res = auth.filter(a => a.id !== id);
+      data.saveData(res, PATH_AUTH);
+      return {
+         success: true,
+         message: "logout success!"
+      };
+         
+   } else {
+
+      return {
+         success: false,
+         message: "logout failed!, wrong id"
+      };
+         
+   }
+
+}
+
 
 export {
    PATH_AUTH,
+   accessExist,
    login,
 };
 
@@ -92,5 +132,6 @@ let newLogin = {
    password: "1234"
 };
 console.log(login(newLogin));
+// console.log(logout(newLogin));
 // console.log(findUserByEmail("alhy23@gmail.com"))
 // console.log(findUserByEmail("hidayatmaruf99@gmail.com"))
