@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import * as db from "../lib/data.js";
 import * as modelUser from "./users_models.js";
@@ -125,7 +124,7 @@ export {
 
 console.log(login({
    email: 'alhy23@gmail.com',
-  password: '1234'
+   password: '1234'
 }));
 // console.log(logout(2));
 // console.log(findUserByEmail("alhy23@gmail.com"))

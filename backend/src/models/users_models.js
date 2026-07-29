@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import { 
    loadData as load, 
@@ -9,13 +8,15 @@ const PATH_USERS = path.join(process.cwd(), 'backend/data', 'users.json');
 
 function createUser ( newUser ) {
 
-   const {success, data} = findUserByEmail(newUser.email)
+   const {success, data} = findUserByEmail(newUser.email);
    if (success) {
+
       return {
          success: false,
          message:"account alredy exist!",
          data: data.name
       };
+   
    }
 
    let users = load(PATH_USERS);
@@ -28,7 +29,11 @@ function createUser ( newUser ) {
    };
    users.push(newUser);
    save(users, PATH_USERS);
-   return newUser;
+   return {
+      success: true,
+      message: `register success!`,
+      data: newUser
+   };
 
 }
 
