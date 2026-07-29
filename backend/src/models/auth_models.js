@@ -2,7 +2,7 @@ import path from 'path';
 import * as db from "../lib/data.js";
 import * as modelUser from "./users_models.js";
 
-const PATH_AUTH = path.join(process.cwd(), 'backend/data', 'auth.json');
+const PATH_AUTH = path.join(process.cwd(), 'data', 'auth.json');
 
 function accessExist (auth, id) {
 

@@ -85,7 +85,6 @@ function findUserById (id) {
 
 }
 
-
 let newUser = {
    "name": "Alhy Ghufron",
    "email": "alhy23@gmail.com",
@@ -107,6 +106,6 @@ export {
    findUserById
 };
 
-console.log(createUser(newUser));
+// console.log(createUser(newUser));
 // console.log(findUserByEmail("alhy23@gmail.com"))
 // console.log(findUserByEmail("hidayatmaruf99@gmail.com"))
