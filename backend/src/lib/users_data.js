@@ -10,7 +10,7 @@ function directory(filePath) {
     }
 }
 
-function loadData() {
+export function loadData() {
     try {
         directory(FILE_PATH);
         if (!fs.existsSync(FILE_PATH)) {
@@ -26,7 +26,7 @@ function loadData() {
     }
 }
 
-function saveData(data) {
+export function saveData(data) {
     try {
         directory(FILE_PATH);
         fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), 'utf-8');
