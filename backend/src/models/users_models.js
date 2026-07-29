@@ -4,7 +4,7 @@ import {
    saveData as save  
 } from "../lib/data.js";
 
-const PATH_USERS = path.join(process.cwd(), 'backend/data', 'users.json');
+const PATH_USERS = path.join(process.cwd(), 'data', 'users.json');
 
 function createUser ( newUser ) {
 
