@@ -1,8 +1,7 @@
 import path from 'path';
 import * as db from "../lib/data.js";
-import { title } from 'process';
 
-export const PATH_NOTES = path.join(process.cwd(), 'backend/data', 'notes.json');
+export const PATH_NOTES = path.join(process.cwd(), 'data', 'notes.json');
 
 export function createNotes (data) {
 
