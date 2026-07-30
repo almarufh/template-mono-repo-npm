@@ -71,10 +71,11 @@ const notesRouter = Router();
  *        description: logout successs
  */
 notesRouter.post("/create", cNote.createNotes);
+
 /**
  * @openapi
  * /notes/change:
- *  PATCH:
+ *  patch:
  *    tags:
  *      - Notes
  *    requestBody:
@@ -144,13 +145,13 @@ notesRouter.patch("/change", cNote.changeNotes);
 
 /**
  * @openapi
- * /notes/:
+ * /notes/{id}:
  *  get:
  *    tags:
  *      - Notes
  *    parameters:
  *      - name: id
- *        in: query
+ *        in: path
  *        required: true
  *        schema:
  *          type: string
