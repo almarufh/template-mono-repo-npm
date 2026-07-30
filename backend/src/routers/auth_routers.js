@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as cAuth from "../controllers/auth_controllers.js";
+import { authMiddleware } from "../middlewares/auth_middlewares.js";
 
 const authRouter = Router();
 
@@ -81,26 +82,10 @@ authRouter.post("/login", cAuth.login);
  *  post:
  *    tags:
  *      - Auth
- *    requestBody:
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              id:
- *                type: string
- *                example: 1785312447951
- *        application/x-www-form-urlencoded:
- *          schema:
- *            type: object
- *            properties:
- *              id:
- *                type: string
- *                example: 1785312447951
  *    responses:
  *      '200':
  *        description: logout successs
  */
-authRouter.post("/logout", cAuth.logout);
+authRouter.patch("/logout", authMiddleware, cAuth.logout);
 
 export default authRouter;

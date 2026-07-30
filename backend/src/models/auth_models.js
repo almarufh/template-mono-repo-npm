@@ -1,6 +1,7 @@
 import path from 'path';
 import * as db from "../lib/data.js";
 import * as modelUser from "./users_models.js";
+import { signJwt } from '../lib/tokenJwt.js';
 
 export const PATH_AUTH = path.join(process.cwd(), 'data', 'auth.json');
 
@@ -33,11 +34,11 @@ export function login (userLogin) {
       if (res.data.password === userLogin.password) {
 
          const id = res.data.id;
-         const token = Date.now() + '-' + Math.round(Math.random() * 1E9);
+         const token = signJwt({id});
          let auth = db.loadData(PATH_AUTH);
          let {success, data} = accessExist(auth, id);
 
-         if (success) {
+         if (success && data.access === true) {
 
             data.access= true;
             data.token = token;
@@ -45,7 +46,12 @@ export function login (userLogin) {
             let res = auth.filter(a => a.id !== id);
             res.push(data);
             db.saveData(res, PATH_AUTH);
-         
+            return {
+               success: true,
+               message: "New Login Acces! succes delete access old!!",
+               data: data
+            };
+            
          } else {
 
             userLogin = {
@@ -56,14 +62,14 @@ export function login (userLogin) {
             };
             auth.push(userLogin);
             db.saveData(auth, PATH_AUTH);
-         
+
+            return {
+               success: true,
+               message: "login success!",
+               data: userLogin
+            };
          }
 
-         return {
-            success: true,
-            message: "login success!",
-            data: userLogin
-         };
       
       } else {
 

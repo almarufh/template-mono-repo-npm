@@ -1,7 +1,9 @@
 import { Router } from "express";
 import * as cNote from "../controllers/notes_controllers.js";
+import { authMiddleware } from "../middlewares/auth_middlewares.js";
 
 const notesRouter = Router();
+notesRouter.use(authMiddleware);
 /**
  * @openapi
  * /notes/create:

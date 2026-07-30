@@ -22,6 +22,7 @@ export function register (req, res) {
 }
 
 export function login (req, res) {
+   console.log("Header :", req.header)
 
    const { email, password } = req.body;
    let userLogin = {
@@ -35,8 +36,7 @@ export function login (req, res) {
 
 export function logout (req, res) {
 
-   const id = req.body.id;
-
+   const id = req.data.id;
    let results = mAuth.logout(id);
    res.json({results});
 

@@ -7,31 +7,31 @@ import * as jwt from "../lib/tokenJwt.js";
  */
 export function authMiddleware(req, res, next){
 
-   const token = req.header("Authorization");
-   if (token.startsWith("Bearer")) {
-
+   let token = req.header("Authorization");
+   if (token.startsWith("Bearer ")) {
+       
       try {
-
-         token = token.slice(7);
+           
+         token = token.slice("Bearer ".length).trim();
          req.data =  jwt.verifyJwt(token);
          next();
       
       } catch (error) {
 
-         req.status(401).json({
+         res.status(401).json({
             success: false,
             message: "Unautorized",
-            data: error
+            data: error.message
          });
       
       }
    
    } else {
 
-      req.status(401).json({
+      res.status(401).json({
          success: false,
          message: "Unautorized",
-         data: error
+         data: error.message
       });
    
    }

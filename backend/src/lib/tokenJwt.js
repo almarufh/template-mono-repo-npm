@@ -5,14 +5,14 @@ const SECRET = process.env.JWT_SECRET;
 function signJwt (payload){
 
    return jwt.sign(payload, SECRET, {
-      expiresIn: "15m"
+      expiresIn: "1d"
    });
 
 }
 
 function verifyJwt (token) {
 
-   return jwt.verify(token, SCRET);
+   return jwt.verify(token, SECRET);
 
 }
 
